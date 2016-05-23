@@ -6,10 +6,8 @@ import hashlib
 import json
 from .. import config
 
-ACCOUNT = config.ACCOUNT
-
 def get_access_token():
-    account = ACCOUNT
+    account = config.ACCOUNT
     password = config.PASSWORD
     seconds = str(int(time.time()))
     signature = hashlib.md5(password+seconds).hexdigest()
@@ -35,7 +33,7 @@ def get_access_token():
 #         return $accessToken;
 
 def get_cars_location(name):
-    account = ACCOUNT
+    account = config.ACCOUNT
     seconds = str(int(time.time()))
     access_token = ACCESS_TOKEN
     url = "http://api.gpsoo.net/1/account/monitor?access_token=%s&\
