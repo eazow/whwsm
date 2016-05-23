@@ -39,7 +39,7 @@ def get_cars_location(name):
     seconds = str(int(time.time()))
     access_token = ACCESS_TOKEN
     url = "http://api.gpsoo.net/1/account/monitor?access_token=%s&"+\
-        "map_type=BAIDU&target=%s&account=%s&time=%s" \
+        "map_type=BAIDU&target=%s&account=%s&time=%s" 
         % (access_token, name, account, seconds);
         
     print url
