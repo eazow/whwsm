@@ -4,3 +4,11 @@ create table entries (
   title text not null,
   'text' text not null
 );
+
+
+create table location (
+  id integer primary key autoincrement,
+  imei text not null,
+  lng text not null,
+  lat text not null
+)
