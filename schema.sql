@@ -1,3 +1,4 @@
+/**
 drop table if exists entries;
 create table entries (
   id integer primary key autoincrement,
@@ -5,10 +6,13 @@ create table entries (
   'text' text not null
 );
 
+*/
 
-create table location (
+drop table if exists locations;
+create table locations (
   id integer primary key autoincrement,
   imei text not null,
   lng text not null,
-  lat text not null
-)
+  lat text not null,
+  name text not null
+);
