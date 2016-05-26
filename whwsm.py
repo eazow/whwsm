@@ -109,4 +109,5 @@ def monitor(name=None):
 def account():
     return render_template('layout.html')
 
-app.run()
+if __name__ == '__main__':
+    app.run()
