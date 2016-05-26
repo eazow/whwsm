@@ -5,6 +5,8 @@ import time
 import hashlib
 import json
 import config
+import whwsm
+import sqlite3
 
 ACCOUNT = config.ACCOUNT
 
@@ -56,15 +58,25 @@ def get_cars_location(name):
         cars_location = response_json.get('data')
         return cars_location
 
+def get_db():
+    """Connects to the specific database."""
+    rv = sqlite3.connect(whwsm.app.config['DATABASE'])
+    return rv
 
-def insert_cars_location(cars_location):
+
+def insert_cars_location(cars_location, name):
+    db = get_db()
     for car_location in cars_location:
         imei = car_location.get('imei')
         lng = car_location.get('lng')
         lat = car_location.get('lat')
         speed = car_location.get('speed')
+        db.execute('insert into locations(imei, lng, lat, name) values (?, ?, ?, ?)',
+            [imei, lng, lat, 'dxzc'])
+    db.commit()
+    
 
 # ACCESS_TOKEN = get_access_token()
-ACCESS_TOKEN = "20007285560510146408350432e70ee1d9d2cdd97d8a675b89502f84e000010010014010"
+ACCESS_TOKEN = "200072855605101464274842326670f35e979a1cefbad01288179bd43e00010010014010"
 cars_location = get_cars_location('大象租车')
-insert_cars_location(cars_location)
+insert_cars_location(cars_location, '大象租车')
