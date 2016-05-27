@@ -72,11 +72,11 @@ def insert_cars_location(cars_location, name):
         lat = car_location.get('lat')
         speed = car_location.get('speed')
         db.execute('insert into locations(imei, lng, lat, name) values (?, ?, ?, ?)',
-            [imei, lng, lat, 'dxzc'])
+            [imei, lng, lat, name])
     db.commit()
     
 
 # ACCESS_TOKEN = get_access_token()
-ACCESS_TOKEN = "200072855605101464274842326670f35e979a1cefbad01288179bd43e00010010014010"
+ACCESS_TOKEN = "20007285560510146431806532767a4ab091ca4d4c75ca056eae0170f000010010014010"
 cars_location = get_cars_location('大象租车')
-insert_cars_location(cars_location, '大象租车')
+insert_cars_location(cars_location, u'大象租车')

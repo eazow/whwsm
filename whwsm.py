@@ -12,7 +12,7 @@ app = Flask(__name__)
 
 # Load default config and override config from an environment variable
 app.config.update(dict(
-    DATABASE=os.path.join(app.root_path, 'flaskr.db'),
+    DATABASE=os.path.join(app.root_path, 'whwsm.db'),
     DEBUG=True,
     SECRET_KEY='development key',
     USERNAME='admin',
@@ -103,11 +103,22 @@ def logout():
 @app.route('/monitor')
 @app.route('/monitor/<name>')
 def monitor(name=None):
-    return render_template('monitor.html', name=name)
+    db = get_db()
+    cur = db.execute('select lng, lat from locations where name=? order by id desc', [name])
+    locations = cur.fetchall()
+    return render_template('monitor.html', name=name, locations=locations)
 
 @app.route('/account')
 def account():
     return render_template('layout.html')
+
+@app.before_request
+def before_request():
+    return
+    if (not session.get('user')) and request.path!='/login' \
+    and (not request.path.endswith('.css')) \
+    and (not request.path.endswith('.js')):
+        return render_template('login.html')
 
 if __name__ == '__main__':
     app.run()
