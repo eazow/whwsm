@@ -88,14 +88,14 @@ def login():
         elif request.form['password'] != app.config['PASSWORD']:
             error = 'Invalid password'
         else:
-            session['logged_in'] = True
+            session['user'] = request.form['username']
             flash('You were logged in')
-            return redirect(url_for('show_entries'))
+            return redirect(url_for('account'))
     return render_template('login.html', error=error)
 
 @app.route('/logout')
 def logout():
-    session.pop('logged_in', None)
+    session.pop('user', None)
     flash('You were logged out')
     return render_template('/login.html')
 #     return redirect(url_for('show_entries'))
@@ -114,7 +114,6 @@ def account():
 
 @app.before_request
 def before_request():
-    return
     if (not session.get('user')) and request.path!='/login' \
     and (not request.path.endswith('.css')) \
     and (not request.path.endswith('.js')):
