@@ -148,12 +148,22 @@
 </html>
 <script>
 var map = new BMap.Map("mapDiv");          // 创建地图实例  
-var carIcon = new BMap.Icon("/i/car_32px.png", new BMap.Size(32, 32));
+var carIcon = new BMap.Icon("/static/i/car_32px.png", new BMap.Size(32, 32));
 var lng = 0;
 var lat = 0;
 var carPoint;
 var carMarkek;
 var count = 0;
+{% for location in locations %}
+lng += {{location.lng}};
+lat += {{location.lat}};
+carPoint = new BMap.Point({{location.lng}}, {{location.lat}});
+carMarker = new BMap.Marker(carPoint, {icon: carIcon});
+map.addOverlay(carMarker);
+count++;
+{% endfor %}
+
+
 {#@foreach($cars as $car)
 #lng += {{$car->lng}};
 #lat += {{$car->lat}};
