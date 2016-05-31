@@ -103,6 +103,8 @@ def logout():
 @app.route('/monitor/<name>')
 def monitor(name=None):
     db = get_db()
+    if name==None:
+        name = u'大象租车'
     cur = db.execute('select lng, lat from locations where name=? order by id desc', [name])
     locations = cur.fetchall()
     return render_template('monitor.html', name=name, locations=locations)

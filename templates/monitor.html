@@ -179,6 +179,15 @@ var point = new BMap.Point(lng, lat);  // 创建点坐标
 map.centerAndZoom(point, 12);
 map.addControl(new BMap.NavigationControl());
 
+var opts = {
+	width : 20,     // 信息窗口宽度
+	height: 10,     // 信息窗口高度
+	title : "鄂A11111" // 信息窗口标题
+//	enableMessage:true,//设置允许信息窗发送短息
+//	message:"亲耐滴，晚上一起吃个饭吧？戳下面的链接看下地址喔~"
+}
+var infoWindow = new BMap.InfoWindow("", opts);
+map.openInfoWindow(infoWindow,point);
 
 var defaultData = [{
     text: '武汉威士曼科技有限公司',
